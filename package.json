@@ -1,0 +1,9 @@
+{
+    "name": "tnpsocket",
+    "version": "0.0.1",
+    "description": "chatting using socket.io and the noun project",
+    "dependencies": {
+        "express": "^4.16.3",
+        "the-noun-project": "^2.0.2"
+    }
+}
