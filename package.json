@@ -4,6 +4,7 @@
     "description": "chatting using socket.io and the noun project",
     "dependencies": {
         "express": "^4.16.3",
+        "nodemon": "^1.17.3",
         "the-noun-project": "^2.0.2"
     }
 }
