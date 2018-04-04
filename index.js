@@ -4,6 +4,7 @@ var config = require('./config');
 var http = require('http').Server(app);
 var bodyParser = require('body-parser');
 var NounProject = require('the-noun-project');
+var io = require('socket.io')(http);
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -20,9 +21,7 @@ app.use('/public', express.static(__dirname + "/public"));
 
 
 app.get('/', function(req,res){
-    console.log('what i got was');
-    console.log(req.query.stuff);
-    nounProject.getIconsByTerm('goat', {limit: 5}, function (err, data) {
+    nounProject.getIconsByTerm('stuff', {limit: 1}, function (err, data) {
         if (!err) {
             console.log(typeof data.icons);
         } else {
@@ -30,6 +29,20 @@ app.get('/', function(req,res){
         }
     });
     res.sendFile(__dirname + '/index.html');
+})
+
+io.on('connection', function(socket){
+    socket.on('message',function(msg){
+
+    nounProject.getIconsByTerm('stuff', {limit: 1}, function (err, data) {
+            if (!err) {
+                io.emit('message',data.icons);
+            } else {
+                console.error(err);
+            }
+        });
+    })
+
 })
 
 
