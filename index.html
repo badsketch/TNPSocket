@@ -5,10 +5,13 @@
     </head>
     <body>
         <h1>Enter Text Here</h1>
-        <form action="" method = "get">
-            <input id = 'm' type="text" name="stuff"/>
+        <form action="">
+            <input id = 'm' autocomplete="off"/>
             <button type="submit">Enter</button>
         </form>
+        <div >
+            <img id="thing" src="" width="42" height="42"/>
+        </div>
         <script type="text/javascript"  src='./public/script.js'></script>
         <script src = "/socket.io/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -21,7 +24,7 @@
                     return false;
                 });
                 socket.on('message', function(msg) {
-                    console.log('got it back: ',msg);
+                    $('#thing').attr('src',msg);
                 })
             });
         </script>

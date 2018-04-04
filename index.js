@@ -21,27 +21,19 @@ app.use('/public', express.static(__dirname + "/public"));
 
 
 app.get('/', function(req,res){
-    nounProject.getIconsByTerm('stuff', {limit: 1}, function (err, data) {
-        if (!err) {
-            console.log(typeof data.icons);
-        } else {
-            console.error(err);
-        }
-    });
     res.sendFile(__dirname + '/index.html');
 })
 
 io.on('connection', function(socket){
     socket.on('message',function(msg){
-
-    nounProject.getIconsByTerm('stuff', {limit: 1}, function (err, data) {
-            if (!err) {
-                io.emit('message',data.icons);
-            } else {
-                console.error(err);
-            }
-        });
-    })
+        nounProject.getIconsByTerm(msg, {limit: 1}, function (err, data) {
+                if (!err) {
+                    io.emit('message',data.icons[0].preview_url);
+                } else {
+                    console.error(err);
+                }
+            });
+        })
 
 })
 
