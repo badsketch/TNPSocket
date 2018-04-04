@@ -27,13 +27,16 @@ app.get('/', function(req,res){
 io.on('connection', function(socket){
     socket.on('message',function(msg){
         nounProject.getIconsByTerm(msg, {limit: 1}, function (err, data) {
-                if (!err) {
-                    io.emit('message',data.icons[0].preview_url);
-                } else {
-                    console.error(err);
-                }
-            });
-        })
+            if (!err) {
+                io.emit('message',data.icons[0].preview_url);
+            } else {
+                console.error(err);
+            }
+        });
+    })
+
+    io.emit('newUser')
+
 
 })
 

@@ -73,6 +73,10 @@
             socket.on('message', function (msg) {
                 $('#messages').append($('<img>').attr('src',msg));
             })
+
+            socket.on('newUser',function(usr){
+                $('#messages').append($('<li>').text('a new user has joined'));
+            })
         });
     </script>
 
