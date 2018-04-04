@@ -35,10 +35,16 @@ io.on('connection', function(socket){
         });
     })
 
-    io.emit('newUser')
+    io.emit('userJoin');
+
+    socket.on('disconnect',function(socket){
+        io.emit('userDisc');
+    })
 
 
 })
+
+
 
 
 

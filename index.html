@@ -71,11 +71,15 @@
                 return false;
             });
             socket.on('message', function (msg) {
-                $('#messages').append($('<img>').attr('src',msg));
+                $('#messages').append($("<li><div><img src='"+msg+"' width=42 height=42 /></div></li>"));
             })
 
-            socket.on('newUser',function(usr){
-                $('#messages').append($('<li>').text('a new user has joined'));
+            socket.on('userJoin',function(usr){
+                $('#messages').append($('<li>').text('a user has joined'));
+            })
+
+            socket.on('userDisc',function(usr){
+                $('#messages').append($('<li>').text('a user has disconnected'));
             })
         });
     </script>
